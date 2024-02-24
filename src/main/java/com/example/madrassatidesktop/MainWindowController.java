@@ -2,13 +2,27 @@ package com.example.madrassatidesktop;
 
 
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.media.Media;
+
+import javafx.scene.media.MediaView;
+
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,15 +36,52 @@ public class MainWindowController implements Initializable {
         root.getChildren().setAll(pane) ;
     }*/
     private  static  BorderPane rootp ;
-   @Override
+    @FXML
+    private Label LoginLabel ;
+    @FXML
+    private MediaView mediaView;
+    @FXML
+    private VBox vbox;
+
+
+    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
        if (!HelloApplication.isSplashLoaded) {
            loadSplashScreen();
        }
 
+       String videoUrl = getClass().getResource("IntroVol2.mp4").toExternalForm(); // Ensure the path is correct
+       Media media = new Media(videoUrl);
+       MediaPlayer mediaPlayer = new MediaPlayer(media);
+       mediaView.setMediaPlayer(mediaPlayer);
+       mediaView.fitWidthProperty().bind(vbox.widthProperty());
+       mediaView.fitHeightProperty().bind(vbox.heightProperty());
+       mediaView.setPreserveRatio(false);
+       mediaPlayer.setVolume(0);
+       mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        mediaPlayer.play(); // Start playback automatically
 
 
    }
+   @FXML
+   private void LoginBtnOnAction(){
+        LoginLabel.setText("Salem you clicked on login");
+   }
+
+       @FXML
+    private void handleSignInAction(ActionEvent event) throws IOException {
+        // Load the Sign In view
+        Parent signInParent = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+        Scene signInScene = new Scene(signInParent);
+
+        // Get the stage from the event that triggered the method call
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene on the stage
+        window.setScene(signInScene);
+        window.show();
+    }
    private void loadSplashScreen() {
        try {
            HelloApplication.isSplashLoaded=true ;
@@ -61,7 +112,7 @@ public class MainWindowController implements Initializable {
            //After fade out, load actual content
            fadeOut.setOnFinished((e) -> {
                try {
-                   AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("testewi.fxml")));
+                   AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("MainWindow.fxml")));
                    root.getChildren().setAll(parentContent);
                } catch (IOException ex) {
 

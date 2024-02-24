@@ -13,11 +13,12 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("testewi.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Madrassati");
-        stage.setHeight(520);
-        stage.setWidth(800);
+        stage.setScene(scene);
+        String css = this.getClass().getResource("style.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
     }
