@@ -1,5 +1,6 @@
 package com.example.madrassatidesktop.Service;
 
+import com.example.madrassatidesktop.Entite.Etudiant;
 import com.example.madrassatidesktop.Entite.Utilisateur;
 import  com.example.madrassatidesktop.Utils.DataSource;
 
@@ -30,7 +31,7 @@ public class UtilisateurService implements IService<Utilisateur> {
 
     @Override
     public void add(Utilisateur utilisateur) throws SQLException {
-        String req = "INSERT INTO `utilisateur` (`id`,`nom`, `email`, `motdepassa`) VALUES (NULL+ '" + utilisateur.getnomUtilisateur() + "', '" + utilisateur.getemail() + "', '" + utilisateur.getmotDePasse() + "');";
+        String req = "INSERT INTO `utilisateur` (`idUtilisateur`,`nom`, `email`, `motdepassa`) VALUES (NULL+ '" + utilisateur.getnomUtilisateur() + "', '" + utilisateur.getemail() + "', '" + utilisateur.getmotDePasse() + "');";
         ste.executeUpdate(req);
     }
 
@@ -43,22 +44,13 @@ public class UtilisateurService implements IService<Utilisateur> {
 
     @Override
     public boolean update(Utilisateur utilisateur) throws SQLException {
-        String req = "UPDATE `utilisateur` SET `id`='" + utilisateur.getId() + "', `nom`='" + utilisateur.getnomUtilisateur() + "', `email`='" + utilisateur.getemail() + "', `motdepasse`='" + utilisateur.getmotDePasse() + "' WHERE id='" + utilisateur.getId() + "';";
+        String req = "UPDATE `utilisateur` SET `idUtilisateur`='" + utilisateur.getId() + "', `nom`='" + utilisateur.getnomUtilisateur() + "', `email`='" + utilisateur.getemail() + "', `motdepasse`='" + utilisateur.getmotDePasse() +"', `role`='" + utilisateur.getRole() + "' WHERE id='" + utilisateur.getId() + "';";
         int rowsUpdated = ste.executeUpdate(req);
         return rowsUpdated > 0;
     }
 
     @Override
     public Utilisateur findById(Utilisateur utilisateur) throws SQLException {
-        String req = "SELECT * FROM `utilisateur` WHERE id='" + utilisateur.getId() + "';";
-        ResultSet res = ste.executeQuery(req);
-        if (res.next()) {
-            int id = res.getInt(1);
-            String nomUtilisateur = res.getString("nomUtilisateur");
-            String email = res.getString("email");
-            String motDePasse = res.getString("motDePasse");
-            return new Utilisateur(id, nomUtilisateur, email, motDePasse);
-        }
         return null;
     }
 
@@ -73,7 +65,8 @@ public class UtilisateurService implements IService<Utilisateur> {
             String nomUtilisateur = res.getString("nomUtilisateur");
             String email = res.getString("email");
             String motDePasse = res.getString("motDePasse");
-            Utilisateur utilisateur = new Utilisateur(id, nomUtilisateur, email, motDePasse);
+            String role =res.getString("role") ;
+            Utilisateur utilisateur = new Utilisateur(id, nomUtilisateur, email, motDePasse,role);
             utilisateurs.add(utilisateur);
         }
         return utilisateurs;

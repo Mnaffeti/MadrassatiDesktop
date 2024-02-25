@@ -87,7 +87,7 @@ public class MainWindowController implements Initializable {
 
        if (isAuthenticated) {
            // Authentication successful
-           navigateToMainScreen(); // You'll need to implement this method
+           navigateToMainScreen();
        } else {
            LoginLabel.setText("LoginFailed");
            // Authentication failed

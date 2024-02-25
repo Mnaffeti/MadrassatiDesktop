@@ -1,5 +1,7 @@
 package com.example.madrassatidesktop.Service;
 
+import com.example.madrassatidesktop.Entite.Enseignant;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,6 +14,8 @@ public interface IService <T>{
     boolean update(T t) throws SQLException;
 
     T findById(T t) throws SQLException;
+
+
 
     List<T> findAll() throws SQLException;
 

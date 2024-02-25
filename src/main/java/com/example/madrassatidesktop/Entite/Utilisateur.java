@@ -6,6 +6,7 @@ public class Utilisateur  {
     private String nomUtilisateur;
     private String email;
     private String motDePasse;
+    private String role ;
 
     public Utilisateur() {
     }
@@ -15,11 +16,12 @@ public class Utilisateur  {
         this.idUtilisateur = idUtilisateur;
     }
 
-    public Utilisateur(int idUtilisateur,String nomUtilisateur, String email, String motDePasse) {
+    public Utilisateur(int idUtilisateur,String nomUtilisateur, String email, String motDePasse, String role) {
         this.idUtilisateur = idUtilisateur;
         this.nomUtilisateur = nomUtilisateur;
         this.email = email;
         this.motDePasse = motDePasse;
+        this.role=role ;
     }
 
 
@@ -50,16 +52,26 @@ public class Utilisateur  {
         this.motDePasse = motDePasse;
     }
 
-    @Override
-    public String toString() {
-        return "Utilisateur{" +
-                "nomUtilisateur='" + nomUtilisateur + '\'' +
-                ", email='" + email + '\'' +
-                ", motDePasse='" + motDePasse + '\'' +
-                '}';
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getId() {
         return idUtilisateur;
+    }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "idUtilisateur=" + idUtilisateur +
+                ", nomUtilisateur='" + nomUtilisateur + '\'' +
+                ", email='" + email + '\'' +
+                ", motDePasse='" + motDePasse + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

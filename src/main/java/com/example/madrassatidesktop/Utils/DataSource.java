@@ -15,7 +15,6 @@ public class DataSource {
     private DataSource() {
         try {
             // Ensure the driver is registered
-            //DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             con = DriverManager.getConnection(url, user, pwd);
             System.out.println("connexion établie");
         } catch (SQLException e) {
