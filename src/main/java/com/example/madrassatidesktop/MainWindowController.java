@@ -1,6 +1,9 @@
 package com.example.madrassatidesktop;
 
 
+import com.example.madrassatidesktop.Entite.Utilisateur;
+import com.example.madrassatidesktop.Service.UtilisateurService;
+import com.example.madrassatidesktop.Utils.DataSource;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -26,6 +32,8 @@ import javafx.scene.media.MediaView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
@@ -42,6 +50,10 @@ public class MainWindowController implements Initializable {
     private MediaView mediaView;
     @FXML
     private VBox vbox;
+    @FXML
+    private TextField UserMailField ;
+    @FXML
+    private PasswordField UserPwdField ;
 
 
     @Override
@@ -67,7 +79,34 @@ public class MainWindowController implements Initializable {
    @FXML
    private void LoginBtnOnAction(){
         LoginLabel.setText("Salem you clicked on login");
+        String email = UserMailField.getText();
+        String password = UserPwdField.getText();
+
+       UtilisateurService service = UtilisateurService.getInstance();
+       boolean isAuthenticated = service.authenticate(email, password);
+
+       if (isAuthenticated) {
+           // Authentication successful
+           navigateToMainScreen(); // You'll need to implement this method
+       } else {
+           LoginLabel.setText("LoginFailed");
+           // Authentication failed
+           showAlert("Login Failed", "Invalid email or password.");
+       }
    }
+
+    private void navigateToMainScreen() {
+        LoginLabel.setText("correct login");
+    }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
 
        @FXML
     private void handleSignInAction(ActionEvent event) throws IOException {

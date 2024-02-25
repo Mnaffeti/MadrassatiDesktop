@@ -26,7 +26,7 @@
          <children>
             <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
          </children></VBox>
-      <Pane fx:id="UserPwdField" layoutX="581.0" layoutY="107.0" prefHeight="375.0" prefWidth="354.0" stylesheets="@style.css">
+      <Pane layoutX="581.0" layoutY="107.0" prefHeight="375.0" prefWidth="354.0" stylesheets="@style.css">
          <children>
             <Button fx:id="LoginBtn" layoutX="139.0" layoutY="231.0" mnemonicParsing="false" onAction="#LoginBtnOnAction" prefHeight="37.0" prefWidth="100.0" text="Login" />
             <Button fx:id="SigninBtn" layoutX="139.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleSignInAction" prefHeight="37.0" prefWidth="100.0" text="Sign in" />
@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="12.0" />
                </font></Label>
             <Label layoutX="43.0" layoutY="126.0" text="Password" textFill="WHITE" />
-            <PasswordField layoutX="129.0" layoutY="123.0" prefHeight="27.0" prefWidth="211.0" promptText="Password" />
+            <PasswordField fx:id="UserPwdField" layoutX="129.0" layoutY="123.0" prefHeight="27.0" prefWidth="211.0" promptText="Password" />
             <TextField fx:id="UserMailField" layoutX="131.0" layoutY="42.0" prefHeight="27.0" prefWidth="211.0" promptText="EMAIL" styleClass="TextField" />
             <Label fx:id="LoginLabel" layoutX="101.0" layoutY="188.0" text="Please enter your login infos" textFill="WHITE" />
          </children>
