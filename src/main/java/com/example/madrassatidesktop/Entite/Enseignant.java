@@ -1,15 +1,15 @@
 package com.example.madrassatidesktop.Entite;
 
 public class Enseignant {
-    private int idEnseignant;
+
     private String nom;
     private String prenom;
     private String specialite;
     private int idUtilisateur;
 
     // Constructor
-    public Enseignant(int idEnseignant, String nom, String prenom, String specialite, int idUtilisateur) {
-        this.idEnseignant = idEnseignant;
+    public Enseignant(String nom, String prenom, String specialite, int idUtilisateur) {
+
         this.nom = nom;
         this.prenom = prenom;
         this.specialite = specialite;
@@ -17,13 +17,9 @@ public class Enseignant {
     }
 
     // Getters and Setters
-    public int getId() {
-        return idEnseignant;
-    }
 
-    public void setId(int idEnseignant) {
-        this.idEnseignant = idEnseignant;
-    }
+
+
 
     public String getNom() {
         return nom;

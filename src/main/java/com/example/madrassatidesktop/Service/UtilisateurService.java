@@ -12,7 +12,7 @@ public class UtilisateurService implements IService<Utilisateur> {
 
 
     private Statement ste;
-
+    private Connection con;
     private static UtilisateurService ser;
 
     private UtilisateurService() {
@@ -31,7 +31,7 @@ public class UtilisateurService implements IService<Utilisateur> {
 
     @Override
     public void add(Utilisateur utilisateur) throws SQLException {
-        String req = "INSERT INTO `utilisateur` (`idUtilisateur`,`nom`, `email`, `motdepassa`) VALUES (NULL+ '" + utilisateur.getnomUtilisateur() + "', '" + utilisateur.getemail() + "', '" + utilisateur.getmotDePasse() + "');";
+        String req = "INSERT INTO utilisateur ( email, motdepasse) VALUES ( '"  + utilisateur.getemail() + "', '" + utilisateur.getmotDePasse() + "');";
         ste.executeUpdate(req);
     }
 
@@ -44,7 +44,7 @@ public class UtilisateurService implements IService<Utilisateur> {
 
     @Override
     public boolean update(Utilisateur utilisateur) throws SQLException {
-        String req = "UPDATE `utilisateur` SET `idUtilisateur`='" + utilisateur.getId() + "', `nom`='" + utilisateur.getnomUtilisateur() + "', `email`='" + utilisateur.getemail() + "', `motdepasse`='" + utilisateur.getmotDePasse() +"', `role`='" + utilisateur.getRole() + "' WHERE id='" + utilisateur.getId() + "';";
+        String req = "UPDATE `utilisateur` SET `idUtilisateur`='" + utilisateur.getId() + "', `email`='" + utilisateur.getemail() + "', `motdepasse`='" + utilisateur.getmotDePasse()  + "' WHERE id='" + utilisateur.getId() + "';";
         int rowsUpdated = ste.executeUpdate(req);
         return rowsUpdated > 0;
     }
@@ -54,7 +54,39 @@ public class UtilisateurService implements IService<Utilisateur> {
         return null;
     }
 
+    public  int getUserIdByEmail(String email) {
+        System.out.println(email);
+        // SQL query to find the user ID
+        String sql = "SELECT idUtilisateur as 'idUtilisateur' FROM utilisateur WHERE email ='"+email+"' ;" ;
 
+        // Local variable to store the ID. Initialized to -1 or another invalid value to represent not found.
+        int userId = -1;
+
+        try {
+            // Establishing the connection
+
+
+            // Preparing the statement to prevent SQL injection
+            UtilisateurService ser =UtilisateurService.getInstance() ;
+
+            // Executing the query
+
+            ResultSet rs = ste.executeQuery(sql);
+
+            // Retrieving the ID from the ResultSet
+            if (rs.next()) {
+                userId = rs.getInt("idUtilisateur");
+            }
+
+            // Closing resources
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userId; // Returning the user ID (or -1 if not found)
+    }
     @Override
     public List<Utilisateur> findAll() throws SQLException {
         List<Utilisateur> utilisateurs = new ArrayList<>();
@@ -62,11 +94,9 @@ public class UtilisateurService implements IService<Utilisateur> {
         ResultSet res = ste.executeQuery(req);
         while (res.next()) {
             int id = res.getInt(1);
-            String nomUtilisateur = res.getString("nomUtilisateur");
             String email = res.getString("email");
             String motDePasse = res.getString("motDePasse");
-            String role =res.getString("role") ;
-            Utilisateur utilisateur = new Utilisateur(id, nomUtilisateur, email, motDePasse,role);
+            Utilisateur utilisateur = new Utilisateur(email, motDePasse);
             utilisateurs.add(utilisateur);
         }
         return utilisateurs;

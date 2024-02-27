@@ -41,7 +41,7 @@ public class EnseignantService implements IService<Enseignant> {
 
     @Override
     public boolean delete(Enseignant enseignant) throws SQLException {
-        String req = "DELETE FROM enseignant WHERE idEnseignant = " + enseignant.getId() + ";";
+        String req = "DELETE FROM enseignant WHERE idEnseignant = " + enseignant.getIdUtilisateur() + ";";
         int rowsDeleted = ste.executeUpdate(req);
         return rowsDeleted > 0;
     }
@@ -52,7 +52,7 @@ public class EnseignantService implements IService<Enseignant> {
                 + "', prenom = '" + enseignant.getPrenom()
                 + "', specialite = '" + enseignant.getSpecialite()
                 + "', idUtilisateur = " + enseignant.getIdUtilisateur()
-                + " WHERE idEnseignant = " + enseignant.getId() + ";";
+                + " WHERE idEnseignant = " + enseignant.getIdUtilisateur() + ";";
         int rowsUpdated = ste.executeUpdate(req);
         return rowsUpdated > 0;
     }
@@ -69,7 +69,6 @@ public class EnseignantService implements IService<Enseignant> {
         ResultSet res = ste.executeQuery(req);
         while (res.next()) {
             Enseignant enseignant = new Enseignant(
-                    res.getInt("idEnseignant"),
                     res.getString("nom"),
                     res.getString("prenom"),
                     res.getString("specialite"),

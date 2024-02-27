@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 25 fév. 2024 à 16:07
+-- Généré le : mar. 27 fév. 2024 à 22:07
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -45,11 +45,24 @@ INSERT INTO `categorie` (`id`, `nom`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cours`
+--
+
+CREATE TABLE `cours` (
+  `idCours` int(11) NOT NULL,
+  `LibeleCours` varchar(12) DEFAULT NULL,
+  `DateDebut` date DEFAULT NULL,
+  `DateFin` date DEFAULT NULL,
+  `idEnseignant` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `enseignant`
 --
 
 CREATE TABLE `enseignant` (
-  `idEnseignant` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `specialite` varchar(255) NOT NULL,
@@ -60,10 +73,10 @@ CREATE TABLE `enseignant` (
 -- Déchargement des données de la table `enseignant`
 --
 
-INSERT INTO `enseignant` (`idEnseignant`, `nom`, `prenom`, `specialite`, `idUtilisateur`) VALUES
-(1, 'الأحمد', 'أحمد', 'Mathematics', 4),
-(2, 'الزهراء', 'فاطمة', 'Physics', 5),
-(3, 'الصديق', 'يوسف', 'Chemistry', 6);
+INSERT INTO `enseignant` (`nom`, `prenom`, `specialite`, `idUtilisateur`) VALUES
+('الأحمد', 'أحمد', 'Mathematics', 4),
+('الزهراء', 'فاطمة', 'Physics', 5),
+('الصديق', 'يوسف', 'Chemistry', 6);
 
 -- --------------------------------------------------------
 
@@ -72,12 +85,9 @@ INSERT INTO `enseignant` (`idEnseignant`, `nom`, `prenom`, `specialite`, `idUtil
 --
 
 CREATE TABLE `etudiant` (
-  `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `age` int(11) NOT NULL,
-  `nomUtilisateur` varchar(255) NOT NULL,
-  `motDePasse` varchar(255) NOT NULL,
   `idFormation` int(11) NOT NULL,
   `idUtilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -86,10 +96,12 @@ CREATE TABLE `etudiant` (
 -- Déchargement des données de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`id`, `nom`, `prenom`, `age`, `nomUtilisateur`, `motDePasse`, `idFormation`, `idUtilisateur`) VALUES
-(4, 'علي', 'محمد', 20, 'aliUser', 'password123', 1, 1),
-(5, 'هدى', 'فاطمة', 22, 'hudaUser', 'password456', 2, 2),
-(6, 'خالد', 'يوسف', 21, 'khaledUser', 'password789', 3, 3);
+INSERT INTO `etudiant` (`nom`, `prenom`, `age`, `idFormation`, `idUtilisateur`) VALUES
+('علي', 'محمد', 20, 1, 1),
+('هدى', 'فاطمة', 22, 2, 2),
+('خالد', 'يوسف', 21, 3, 3),
+('aaa', 'aaa', 22, 3, 12),
+('zezezae', 'ezaeaze', 10, 1, 21);
 
 -- --------------------------------------------------------
 
@@ -144,7 +156,18 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `email`, `motdepasse`) VALUES
 (4, 'khaled@example.com', 'password789'),
 (5, 'ahmed_teacher@example.com', 'securepasswo'),
 (6, 'fatima_teacher@example.com', 'securepasswo'),
-(7, 'youssef_teacher@example.com', 'securepasswo');
+(7, 'youssef_teacher@example.com', 'securepasswo'),
+(9, 'yassine', 'yassine'),
+(11, 'azza@gmail.tn', '123456778910'),
+(12, 'aziza@ziza', 'zzzz'),
+(13, 'aaz', 'razrazr'),
+(14, 'azeaze', 'zaeaze'),
+(16, 'azeaze@zeazeazea', 'azezaea'),
+(17, 'azeaze@usa', 'azeaze'),
+(18, 'azeze', 'eazeaz'),
+(19, 'rere', 'eee'),
+(20, 'aa', 'dd'),
+(21, 'zeaze', 'eazeaze');
 
 --
 -- Index pour les tables déchargées
@@ -157,17 +180,23 @@ ALTER TABLE `categorie`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `cours`
+--
+ALTER TABLE `cours`
+  ADD PRIMARY KEY (`idCours`);
+
+--
 -- Index pour la table `enseignant`
 --
 ALTER TABLE `enseignant`
-  ADD PRIMARY KEY (`idEnseignant`),
+  ADD PRIMARY KEY (`idUtilisateur`),
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
 --
 -- Index pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idUtilisateur`),
   ADD KEY `idFormation` (`idFormation`),
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
@@ -182,7 +211,8 @@ ALTER TABLE `formation`
 -- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`idUtilisateur`);
+  ADD PRIMARY KEY (`idUtilisateur`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -195,18 +225,6 @@ ALTER TABLE `categorie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `enseignant`
---
-ALTER TABLE `enseignant`
-  MODIFY `idEnseignant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `etudiant`
---
-ALTER TABLE `etudiant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT pour la table `formation`
 --
 ALTER TABLE `formation`
@@ -216,7 +234,7 @@ ALTER TABLE `formation`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Contraintes pour les tables déchargées

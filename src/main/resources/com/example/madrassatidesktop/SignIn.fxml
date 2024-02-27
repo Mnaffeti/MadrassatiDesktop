@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -14,7 +15,7 @@
     <children>
         <Pane layoutY="-2.0" prefHeight="510.0" prefWidth="539.0" style="-fx-background-color: #07D395;" stylesheets="@style.css">
             <children>
-                <TextField layoutX="203.0" layoutY="86.0" prefHeight="34.0" prefWidth="281.0" style="-fx-border-color: #9643A9; -fx-background-color: #FFFFFF; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" />
+                <TextField fx:id="emailField" layoutX="203.0" layoutY="86.0" prefHeight="34.0" prefWidth="281.0" style="-fx-border-color: #9643A9; -fx-background-color: #FFFFFF; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" />
                 <Label layoutX="56.0" layoutY="93.0" text="E-mail">
                     <font>
                         <Font size="14.0" />
@@ -25,19 +26,19 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="203.0" layoutY="146.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
+                <TextField fx:id="NameField" layoutX="203.0" layoutY="146.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
                 <Label layoutX="56.0" layoutY="210.0" text="Surname">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="203.0" layoutY="203.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
+                <TextField fx:id="SurnameField" layoutX="203.0" layoutY="203.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
                 <Label layoutX="53.0" layoutY="265.0" text="Password">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <PasswordField layoutX="203.0" layoutY="258.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
+                <PasswordField fx:id="PasswordField" layoutX="203.0" layoutY="258.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
                 <Label layoutX="53.0" layoutY="327.0" prefHeight="20.0" prefWidth="126.0" text="Birth date">
                     <font>
                         <Font size="14.0" />
@@ -46,11 +47,15 @@
                 <Separator layoutX="56.0" layoutY="383.0" opacity="0.15" prefHeight="3.0" prefWidth="423.0" />
                 <Separator layoutX="54.0" layoutY="36.0" opacity="0.15" prefHeight="3.0" prefWidth="423.0" />
                 <Button layoutX="158.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #FCBB31;" text="CANCEL" textFill="WHITE" />
-                <Button layoutX="288.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="Sign in" textFill="WHITE" />
-            <TextField layoutX="203.0" layoutY="320.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
+                <Button fx:id="SigninBtn" layoutX="288.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleSignin" prefHeight="34.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="Sign in" textFill="WHITE" />
+            <TextField fx:id="BirthDateField" layoutX="203.0" layoutY="320.0" prefHeight="34.0" prefWidth="281.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #9643A9; -fx-border-radius: 20; -fx-background-insets: 0000;" styleClass="text-input" stylesheets="@style.css" />
             <Label layoutX="46.0" layoutY="397.0" text="Are you : " />
-            <CheckBox fx:id="teacherChecked" layoutX="166.0" layoutY="399.0" mnemonicParsing="false" text="Teacher" />
-            <CheckBox fx:id="StudentChecked" layoutX="274.0" layoutY="398.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="78.0" text="Student" />
+            <RadioButton fx:id="StudentChecked" layoutX="179.0" layoutY="399.0" mnemonicParsing="false" selected="true" text="Student">
+               <toggleGroup>
+                  <ToggleGroup fx:id="UserType" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="teacherChecked" layoutX="288.0" layoutY="399.0" mnemonicParsing="false" text="Teacher" toggleGroup="$UserType" />
             </children>
         </Pane>
         <Label layoutX="233.0" layoutY="39.0" text="Sign In" textFill="WHITE">

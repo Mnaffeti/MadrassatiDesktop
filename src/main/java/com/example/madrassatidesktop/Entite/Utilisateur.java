@@ -3,11 +3,8 @@ package com.example.madrassatidesktop.Entite;
 public class Utilisateur  {
     private int idUtilisateur ;
 
-    private String nomUtilisateur;
     private String email;
     private String motDePasse;
-    private String role ;
-
     public Utilisateur() {
     }
 
@@ -16,25 +13,13 @@ public class Utilisateur  {
         this.idUtilisateur = idUtilisateur;
     }
 
-    public Utilisateur(int idUtilisateur,String nomUtilisateur, String email, String motDePasse, String role) {
-        this.idUtilisateur = idUtilisateur;
-        this.nomUtilisateur = nomUtilisateur;
+    public Utilisateur(String email,String motDePasse) {
+        //this.idUtilisateur = idUtilisateur;
         this.email = email;
         this.motDePasse = motDePasse;
-        this.role=role ;
+
     }
 
-
-
-
-
-    public String getnomUtilisateur() {
-        return nomUtilisateur;
-    }
-
-    public void setnomUtilisateur(String nomUtilisateur) {
-        this.nomUtilisateur = nomUtilisateur;
-    }
 
     public String getemail() {
         return email;
@@ -51,15 +36,6 @@ public class Utilisateur  {
     public void setmotDePasee(String motDePasse) {
         this.motDePasse = motDePasse;
     }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public int getId() {
         return idUtilisateur;
     }
@@ -68,10 +44,8 @@ public class Utilisateur  {
     public String toString() {
         return "Utilisateur{" +
                 "idUtilisateur=" + idUtilisateur +
-                ", nomUtilisateur='" + nomUtilisateur + '\'' +
                 ", email='" + email + '\'' +
                 ", motDePasse='" + motDePasse + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }
