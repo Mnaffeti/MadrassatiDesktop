@@ -10,6 +10,7 @@ module com.example.madrassatidesktop {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires com.calendarfx.view;
 
     opens com.example.madrassatidesktop to javafx.fxml;
     exports com.example.madrassatidesktop;
