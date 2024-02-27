@@ -27,7 +27,13 @@ import javafx.util.Duration;
 import javafx.scene.media.Media;
 
 import javafx.scene.media.MediaView;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Calendar.Style;
+import com.calendarfx.model.CalendarSource;
+import com.calendarfx.view.CalendarView ;
 
 
 import java.io.IOException;
@@ -95,9 +101,31 @@ public class MainWindowController implements Initializable {
        }
    }
 
-    private void navigateToMainScreen() {
-        LoginLabel.setText("correct login");
-    }
+
+
+        private void navigateToMainScreen() {
+            try {
+                // Load the FXML file for the main screen
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("DashBoardStudent.fxml")); // Make sure to provide the correct path
+                Parent root = loader.load();
+
+                // Get the current stage (window) using the login label
+                Stage stage = (Stage) LoginLabel.getScene().getWindow();
+
+                // Set the scene for the stage with the main screen layout
+                stage.setScene(new Scene(root));
+
+                // Optionally, set the title for the new stage
+                stage.setTitle("Main Screen");
+
+                // Show the new scene
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception (e.g., log the error, show an error alert)
+            }
+        }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
