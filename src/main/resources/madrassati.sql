@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 27 fév. 2024 à 23:52
+-- Généré le : mer. 28 fév. 2024 à 23:11
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -51,10 +51,29 @@ INSERT INTO `categorie` (`id`, `nom`, `description`) VALUES
 CREATE TABLE `cours` (
                          `idCours` int(11) NOT NULL,
                          `LibeleCours` varchar(12) DEFAULT NULL,
-                         `DateDebut` date DEFAULT NULL,
-                         `DateFin` date DEFAULT NULL,
+                         `DateDebut` datetime DEFAULT NULL,
+                         `DateFin` datetime DEFAULT NULL,
                          `idEnseignant` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `cours`
+--
+
+INSERT INTO `cours` (`idCours`, `LibeleCours`, `DateDebut`, `DateFin`, `idEnseignant`) VALUES
+                                                                                           (1, 'JAVA GUI VAL', '2024-03-01 09:00:00', '2024-03-01 12:00:00', 4),
+                                                                                           (3, 'C++', '2024-03-04 09:00:00', '2024-03-04 12:00:00', 5),
+                                                                                           (8, 'Big Data', '2024-03-05 09:00:00', '2024-03-05 12:00:00', 4),
+                                                                                           (9, 'GIT', '2024-03-05 14:00:00', '2024-03-05 17:00:00', 5),
+                                                                                           (10, 'QT GUI', '2024-03-06 09:00:00', '2024-03-06 12:00:00', 6),
+                                                                                           (11, 'Technique av', '2024-03-06 14:00:00', '2024-03-06 17:00:00', 4),
+                                                                                           (12, 'Big Data', '2024-03-07 09:00:00', '2024-03-07 12:00:00', 5),
+                                                                                           (13, 'ML', '2024-03-07 14:00:00', '2024-03-07 17:00:00', 6),
+                                                                                           (14, 'UML', '2024-03-08 09:00:00', '2024-03-08 12:00:00', 4),
+                                                                                           (15, 'GIT', '2024-03-08 14:00:00', '2024-03-08 17:00:00', 5),
+                                                                                           (16, 'CI/CD', '2024-03-09 09:00:00', '2024-03-09 12:00:00', 6),
+                                                                                           (17, 'ILETS PREP', '2024-03-09 14:00:00', '2024-03-09 17:00:00', 4),
+                                                                                           (18, 'UML', '2024-03-10 09:00:00', '2024-03-10 12:00:00', 5);
 
 -- --------------------------------------------------------
 
