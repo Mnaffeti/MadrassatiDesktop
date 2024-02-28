@@ -1,28 +1,22 @@
 package com.example.madrassatidesktop.Entite;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Cours {
-
-    // Attributes of the Cours class
     private int idCours;
-    private String nom;
-    private String description;
-    private int duree; // Duration in hours
-    private double coefficient; // Coefficient for grading
+    private String libeleCours;
+    private LocalDateTime dateDebut;
+    private LocalDateTime  dateFin;
+    private int idEnseignant;
 
-    // Default constructor
-    public Cours() {
-    }
-
-    // Parameterized constructor
-    public Cours(int idCours, String nom, String description, int duree, double coefficient) {
+    public Cours(int idCours, String libeleCours, LocalDateTime dateDebut, LocalDateTime dateFin, int idEnseignant) {
         this.idCours = idCours;
-        this.nom = nom;
-        this.description = description;
-        this.duree = duree;
-        this.coefficient = coefficient;
+        this.libeleCours = libeleCours;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.idEnseignant = idEnseignant;
     }
-
-    // Getters and Setters
     public int getIdCours() {
         return idCours;
     }
@@ -31,47 +25,48 @@ public class Cours {
         this.idCours = idCours;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLibeleCours() {
+        return libeleCours;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLibeleCours(String libeleCours) {
+        this.libeleCours = libeleCours;
     }
 
-    public String getDescription() {
-        return description;
+    public LocalDateTime getDateDebut() {
+        return dateDebut;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDateDebut(LocalDateTime dateDebut) {
+        this.dateDebut = dateDebut;
     }
 
-    public int getDuree() {
-        return duree;
+    public LocalDateTime getDateFin() {
+        return dateFin;
     }
 
-    public void setDuree(int duree) {
-        this.duree = duree;
+    public void setDateFin(LocalDateTime dateFin) {
+        this.dateFin = dateFin;
     }
 
-    public double getCoefficient() {
-        return coefficient;
+    public int getIdEnseignant() {
+        return idEnseignant;
     }
 
-    public void setCoefficient(double coefficient) {
-        this.coefficient = coefficient;
+    public void setIdEnseignant(int idEnseignant) {
+        this.idEnseignant = idEnseignant;
     }
 
-    // toString method to display information about the course
+    // Optional: Override toString() method for easier object representation
     @Override
     public String toString() {
         return "Cours{" +
                 "idCours=" + idCours +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                ", duree=" + duree +
-                ", coefficient=" + coefficient +
+                ", libeleCours='" + libeleCours + '\'' +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", idEnseignant=" + idEnseignant +
                 '}';
     }
+
 }

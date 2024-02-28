@@ -65,6 +65,11 @@ public class EtudiantService implements IService<Etudiant> {
         return null;
     }
 
+    @Override
+    public Etudiant findById(int t) throws SQLException {
+        return null;
+    }
+
 
     @Override
     public List<Etudiant> findAll() throws SQLException {

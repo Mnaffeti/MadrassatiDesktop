@@ -54,6 +54,11 @@ public class UtilisateurService implements IService<Utilisateur> {
         return null;
     }
 
+    @Override
+    public Utilisateur findById(int t) throws SQLException {
+        return null;
+    }
+
     public  int getUserIdByEmail(String email) {
         System.out.println(email);
         // SQL query to find the user ID

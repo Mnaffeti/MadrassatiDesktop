@@ -63,6 +63,11 @@ public class EnseignantService implements IService<Enseignant> {
     }
 
     @Override
+    public Enseignant findById(int t) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Enseignant> findAll() throws SQLException {
         List<Enseignant> enseignants = new ArrayList<>();
         String req = "SELECT * FROM enseignant;";

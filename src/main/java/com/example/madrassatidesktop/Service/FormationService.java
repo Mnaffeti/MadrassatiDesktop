@@ -97,6 +97,11 @@ public class FormationService implements IService<Formation> {
     }
 
     @Override
+    public Formation findById(int t) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Formation> findAll() throws SQLException {
         List<Formation> formations = new ArrayList<>();
         String req = "SELECT * FROM `formation`";

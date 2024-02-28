@@ -15,6 +15,16 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-fontawesome-pack</artifactId>
+      <version>12.2.0</version> <!-- Use the latest version available -->
+    </dependency>
+    <dependency>
+      <groupId>com.calendarfx</groupId>
+      <artifactId>view</artifactId>
+      <version>11.8.3</version>
+    </dependency>
+    <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>17.0.6</version>

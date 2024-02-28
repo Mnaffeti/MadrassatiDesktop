@@ -14,7 +14,7 @@ public interface IService <T>{
     boolean update(T t) throws SQLException;
 
     T findById(T t) throws SQLException;
-
+    T findById(int t) throws SQLException;
 
 
     List<T> findAll() throws SQLException;
