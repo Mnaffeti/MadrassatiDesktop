@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -37,60 +38,46 @@ import javafx.util.Duration;
 
 public class DashBoardStudentController implements Initializable {
     @FXML
+    private Button OpenCalendar;
+
+    @FXML
+    private Button ShowStatBtn;
+
+    @FXML
+    private Label StudentNameLabel;
+
+    @FXML
+    private Button btnOverview;
+
+    @FXML
+    private Button btnSignout;
+
+    @FXML
+    private Pane pnlCustomer;
+
+    @FXML
+    private Pane pnlMenus;
+
+    @FXML
+    private Pane pnlOrders;
+
+    @FXML
+    private Pane pnlOverview;
+    @FXML
     private Label StudentName;
     @FXML
     private Label StudentNameAr;
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private Button OpenCalendar;
+    
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-           // loadWelcomeScreen();
+
 
 
     }
 
-    /*private void loadWelcomeScreen() {
-        try {
-            //Load splash screen view FXML
-            AnchorPane pane = FXMLLoader.load(getClass().getResource(("WelcomeSplash.fxml")));
-            //Add it to root container (Can be StackPane, AnchorPane etc)
-            rootPane.getChildren().setAll(pane);
-
-            //Load splash screen with fade in effect
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), pane);
-            fadeIn.setFromValue(0);
-            fadeIn.setToValue(1);
-            fadeIn.setCycleCount(1);
-
-            //Finish splash with fade out effect
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(5), pane);
-            fadeOut.setFromValue(1);
-            fadeOut.setToValue(0);
-            fadeOut.setCycleCount(1);
-
-            fadeIn.play();
-
-            //After fade in, start fade out
-            fadeIn.setOnFinished((e) -> {
-                fadeOut.play();
-            });
-
-            //After fade out, load actual content
-            fadeOut.setOnFinished((e) -> {
-                try {
-                    AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("DashBoardStudent.fxml")));
-                    rootPane.getChildren().setAll(parentContent);
-                } catch (IOException ex) {
-
-                }
-            });
-        } catch (IOException ex) {
-
-        }
-
-    }*/
 
     @FXML
     void OpenCalendarAction(ActionEvent event) throws SQLException {
@@ -127,4 +114,12 @@ public class DashBoardStudentController implements Initializable {
 
     }
 
+    public void handleClicks(ActionEvent event) {
+    }
+
+    public void ShowStats(ActionEvent event) {
+    }
+
+    public void TakeMeToLogin(ActionEvent event) {
+    }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 28 fév. 2024 à 23:11
+-- Généré le : jeu. 29 fév. 2024 à 23:35
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -53,27 +53,28 @@ CREATE TABLE `cours` (
                          `LibeleCours` varchar(12) DEFAULT NULL,
                          `DateDebut` datetime DEFAULT NULL,
                          `DateFin` datetime DEFAULT NULL,
-                         `idEnseignant` int(11) DEFAULT NULL
+                         `idEnseignant` int(11) DEFAULT NULL,
+                         `idModule` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `cours`
 --
 
-INSERT INTO `cours` (`idCours`, `LibeleCours`, `DateDebut`, `DateFin`, `idEnseignant`) VALUES
-                                                                                           (1, 'JAVA GUI VAL', '2024-03-01 09:00:00', '2024-03-01 12:00:00', 4),
-                                                                                           (3, 'C++', '2024-03-04 09:00:00', '2024-03-04 12:00:00', 5),
-                                                                                           (8, 'Big Data', '2024-03-05 09:00:00', '2024-03-05 12:00:00', 4),
-                                                                                           (9, 'GIT', '2024-03-05 14:00:00', '2024-03-05 17:00:00', 5),
-                                                                                           (10, 'QT GUI', '2024-03-06 09:00:00', '2024-03-06 12:00:00', 6),
-                                                                                           (11, 'Technique av', '2024-03-06 14:00:00', '2024-03-06 17:00:00', 4),
-                                                                                           (12, 'Big Data', '2024-03-07 09:00:00', '2024-03-07 12:00:00', 5),
-                                                                                           (13, 'ML', '2024-03-07 14:00:00', '2024-03-07 17:00:00', 6),
-                                                                                           (14, 'UML', '2024-03-08 09:00:00', '2024-03-08 12:00:00', 4),
-                                                                                           (15, 'GIT', '2024-03-08 14:00:00', '2024-03-08 17:00:00', 5),
-                                                                                           (16, 'CI/CD', '2024-03-09 09:00:00', '2024-03-09 12:00:00', 6),
-                                                                                           (17, 'ILETS PREP', '2024-03-09 14:00:00', '2024-03-09 17:00:00', 4),
-                                                                                           (18, 'UML', '2024-03-10 09:00:00', '2024-03-10 12:00:00', 5);
+INSERT INTO `cours` (`idCours`, `LibeleCours`, `DateDebut`, `DateFin`, `idEnseignant`, `idModule`) VALUES
+                                                                                                       (1, 'JAVA GUI VAL', '2024-03-01 09:00:00', '2024-03-01 12:00:00', 4, 1),
+                                                                                                       (3, 'C++', '2024-03-04 09:00:00', '2024-03-04 12:00:00', 5, 2),
+                                                                                                       (8, 'Big Data', '2024-03-05 09:00:00', '2024-03-05 12:00:00', 4, 1),
+                                                                                                       (9, 'GIT', '2024-03-05 14:00:00', '2024-03-05 17:00:00', 5, 2),
+                                                                                                       (10, 'QT GUI', '2024-03-06 09:00:00', '2024-03-06 12:00:00', 6, 2),
+                                                                                                       (11, 'Technique av', '2024-03-06 14:00:00', '2024-03-06 17:00:00', 4, 1),
+                                                                                                       (12, 'Big Data', '2024-03-07 09:00:00', '2024-03-07 12:00:00', 5, 2),
+                                                                                                       (13, 'ML', '2024-03-07 14:00:00', '2024-03-07 17:00:00', 6, 1),
+                                                                                                       (14, 'UML', '2024-03-08 09:00:00', '2024-03-08 12:00:00', 4, 2),
+                                                                                                       (15, 'GIT', '2024-03-08 14:00:00', '2024-03-08 17:00:00', 5, 2),
+                                                                                                       (16, 'CI/CD', '2024-03-09 09:00:00', '2024-03-09 12:00:00', 6, 2),
+                                                                                                       (17, 'ILETS PREP', '2024-03-09 14:00:00', '2024-03-09 17:00:00', 4, 2),
+                                                                                                       (18, 'UML', '2024-03-10 09:00:00', '2024-03-10 12:00:00', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,8 @@ INSERT INTO `etudiant` (`nom`, `prenom`, `age`, `idFormation`, `idUtilisateur`) 
                                                                                     ('هدى', 'فاطمة', 22, 2, 2),
                                                                                     ('خالد', 'يوسف', 21, 3, 3),
                                                                                     ('aaa', 'aaa', 22, 3, 12),
-                                                                                    ('zezezae', 'ezaeaze', 10, 1, 21);
+                                                                                    ('zezezae', 'ezaeaze', 10, 1, 21),
+                                                                                    ('Mohamed Aziz', 'Naffeti', 23, 1, 22);
 
 -- --------------------------------------------------------
 
@@ -156,15 +158,16 @@ CREATE TABLE `formation` (
 --
 
 INSERT INTO `formation` (`idFormation`, `sujet`, `description`, `difficulte`, `duree`, `idCategorie`) VALUES
-                                                                                                          (1, 'PHP', 'PHP est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques via un serveur HTTP, mais pouvant également fonctionner comme nimporte quel langage interprété de façon locale.', 'Facile', 20, 1),
-                                                                                                          (2, 'JAVA', 'Java est un langage de programmation orienté objet créé par James Gosling et Patrick Naughton, employés de Sun Microsystems, avec le soutien de Bill Joy (cofondateur de Sun Microsystems en 1982), présenté officiellement le 23 mai 1995 au SunWorld.', 'Moyen', 30, 1),
-                                                                                                          (3, 'C++', 'Le C++ est un langage de programmation compilé permettant la programmation sous de multiples paradigmes (comme la programmation procédurale, la programmation orientée objet ou la programmation générique).', 'Difficile', 40, 1),
+                                                                                                          (1, 'Baccalaureat', 'Bac', 'Facile', 20, 1),
+                                                                                                          (2, 'PHD', 'PHD', 'HARD', 30, 2),
+                                                                                                          (3, 'Engineering', 'SW ENG', 'Difficile', 40, 1),
                                                                                                           (4, 'HTML', 'HTML, sigle de HyperText Markup Language, est le format de données conçu pour représenter les pages web.', 'Facile', 20, 2),
                                                                                                           (5, 'CSS', 'Les feuilles de style en cascade, généralement appelées CSS de langlais Cascading Style Sheets, forment un langage informatique qui décrit la présentation des documents HTML et XML.', 'Moyen', 30, 2),
                                                                                                           (6, 'JavaScript', 'JavaScript est un langage de programmation de scripts principalement employé dans les pages web interactives mais aussi coté serveur.', 'Difficile', 40, 2),
                                                                                                           (7, 'MySQL', 'MySQL est un système de gestion de bases de données relationnelles (SGBDR).', 'Facile', 20, 3),
                                                                                                           (8, 'Oracle', 'Oracle est un système de gestion de base de données relationnelle (SGBDR) qui depuis les années 2000 sest imposé comme un outil incontournable dans le monde professionnel.', 'Moyen', 30, 3),
-                                                                                                          (9, 'SQL Server', 'Microsoft SQL Server est un système de gestion de base de données (SGBD) en langage SQL incorporant entre autres un SGBDR (SGBD relationnel ») développé et commercialisé par la société Microsoft.', 'Difficile', 40, 3);
+                                                                                                          (9, 'SQL Server', 'Microsoft SQL Server est un système de gestion de base de données (SGBD) en langage SQL incorporant entre autres un SGBDR (SGBD relationnel ») développé et commercialisé par la société Microsoft.', 'Difficile', 40, 3),
+                                                                                                          (10, 'License en informatique', 'Formatin licence informatique fondamentale', 'Meduim', 45, 1);
 
 -- --------------------------------------------------------
 
@@ -175,9 +178,17 @@ INSERT INTO `formation` (`idFormation`, `sujet`, `description`, `difficulte`, `d
 CREATE TABLE `module` (
                           `idModule` int(11) NOT NULL,
                           `idFormation` int(11) NOT NULL,
-                          `idCours` int(11) NOT NULL,
-                          `coeff` int(11) NOT NULL DEFAULT 1
+                          `coeff` int(11) NOT NULL DEFAULT 1,
+                          `LibModule` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `module`
+--
+
+INSERT INTO `module` (`idModule`, `idFormation`, `coeff`, `LibModule`) VALUES
+                                                                           (1, 1, 4, 'Math et Proba'),
+                                                                           (2, 3, 1, 'OOP');
 
 -- --------------------------------------------------------
 
@@ -213,7 +224,8 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `email`, `motdepasse`) VALUES
                                                                        (18, 'azeze', 'eazeaz'),
                                                                        (19, 'rere', 'eee'),
                                                                        (20, 'aa', 'dd'),
-                                                                       (21, 'zeaze', 'eazeaze');
+                                                                       (21, 'zeaze', 'eazeaze'),
+                                                                       (22, 'mednaffeti@madrassati.tn', '123456789');
 
 --
 -- Index pour les tables déchargées
@@ -230,7 +242,8 @@ ALTER TABLE `categorie`
 --
 ALTER TABLE `cours`
     ADD PRIMARY KEY (`idCours`),
-  ADD KEY `pfk1` (`idEnseignant`);
+  ADD KEY `pfk1` (`idEnseignant`),
+  ADD KEY `fk_cours_module` (`idModule`);
 
 --
 -- Index pour la table `enseignant`
@@ -267,8 +280,7 @@ ALTER TABLE `formation`
 --
 ALTER TABLE `module`
     ADD PRIMARY KEY (`idModule`),
-  ADD KEY `fk_module_formation` (`idFormation`),
-  ADD KEY `fk_module_cours` (`idCours`);
+  ADD KEY `fk_module_formation` (`idFormation`);
 
 --
 -- Index pour la table `utilisateur`
@@ -297,19 +309,19 @@ ALTER TABLE `exam`
 -- AUTO_INCREMENT pour la table `formation`
 --
 ALTER TABLE `formation`
-    MODIFY `idFormation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+    MODIFY `idFormation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `module`
 --
 ALTER TABLE `module`
-    MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-    MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+    MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Contraintes pour les tables déchargées
@@ -319,7 +331,8 @@ ALTER TABLE `utilisateur`
 -- Contraintes pour la table `cours`
 --
 ALTER TABLE `cours`
-    ADD CONSTRAINT `pfk1` FOREIGN KEY (`idEnseignant`) REFERENCES `enseignant` (`idUtilisateur`);
+    ADD CONSTRAINT `fk_cours_module` FOREIGN KEY (`idModule`) REFERENCES `module` (`idModule`),
+  ADD CONSTRAINT `pfk1` FOREIGN KEY (`idEnseignant`) REFERENCES `enseignant` (`idUtilisateur`);
 
 --
 -- Contraintes pour la table `enseignant`
@@ -351,8 +364,7 @@ ALTER TABLE `formation`
 -- Contraintes pour la table `module`
 --
 ALTER TABLE `module`
-    ADD CONSTRAINT `fk_module_cours` FOREIGN KEY (`idCours`) REFERENCES `cours` (`idCours`),
-  ADD CONSTRAINT `fk_module_formation` FOREIGN KEY (`idFormation`) REFERENCES `formation` (`idFormation`);
+    ADD CONSTRAINT `fk_module_formation` FOREIGN KEY (`idFormation`) REFERENCES `formation` (`idFormation`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -9,13 +9,15 @@ public class Cours {
     private LocalDateTime dateDebut;
     private LocalDateTime  dateFin;
     private int idEnseignant;
+    private int idModule ;
 
-    public Cours(int idCours, String libeleCours, LocalDateTime dateDebut, LocalDateTime dateFin, int idEnseignant) {
+    public Cours(int idCours, String libeleCours, LocalDateTime dateDebut, LocalDateTime dateFin, int idEnseignant,int idModule) {
         this.idCours = idCours;
         this.libeleCours = libeleCours;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.idEnseignant = idEnseignant;
+        this.idModule=idModule;
     }
     public int getIdCours() {
         return idCours;
@@ -57,6 +59,14 @@ public class Cours {
         this.idEnseignant = idEnseignant;
     }
 
+    public int getIdModule() {
+        return idModule;
+    }
+
+    public void setIdModule(int idModule) {
+        this.idModule = idModule;
+    }
+
     // Optional: Override toString() method for easier object representation
     @Override
     public String toString() {
@@ -68,5 +78,6 @@ public class Cours {
                 ", idEnseignant=" + idEnseignant +
                 '}';
     }
+
 
 }

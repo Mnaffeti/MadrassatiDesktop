@@ -30,13 +30,14 @@ public class CoursService implements IService<Cours> {
     }
 
     public void add(Cours cours) throws SQLException {
-        String req = "INSERT INTO cours (idCours, LibeleCours, DateDebut, DateFin, idEnseignant) VALUES (?, ?, ?, ?, ?)";
+        String req = "INSERT INTO cours (idCours, LibeleCours, DateDebut, DateFin, idEnseignant,idModule) VALUES (?, ?, ?, ?, ?,?)";
         PreparedStatement pstmt = con.prepareStatement(req);
         pstmt.setInt(1, cours.getIdCours());
         pstmt.setString(2, cours.getLibeleCours());
         pstmt.setTimestamp(3, Timestamp.valueOf(cours.getDateDebut()));
         pstmt.setTimestamp(4, Timestamp.valueOf(cours.getDateFin()));
         pstmt.setInt(5, cours.getIdEnseignant());
+        pstmt.setInt(6,cours.getIdModule());
         pstmt.executeUpdate();
     }
     @Override
@@ -47,13 +48,13 @@ public class CoursService implements IService<Cours> {
     }
 
     public boolean update(Cours cours) throws SQLException {
-        String req = "UPDATE cours SET LibeleCours = ?, DateDebut = ?, DateFin = ?, idEnseignant = ? WHERE idCours = ?";
+        String req = "UPDATE cours SET LibeleCours = ?, DateDebut = ?, DateFin = ?, idEnseignant = ? ,idModule = ? WHERE idCours = ?";
         PreparedStatement pstmt = con.prepareStatement(req);
         pstmt.setString(1, cours.getLibeleCours());
         pstmt.setTimestamp(2, Timestamp.valueOf(cours.getDateDebut()));
         pstmt.setTimestamp(3, Timestamp.valueOf(cours.getDateFin()));
         pstmt.setInt(4, cours.getIdEnseignant());
-        pstmt.setInt(5, cours.getIdCours());
+        pstmt.setInt(5, cours.getIdModule());
         int rowsUpdated = pstmt.executeUpdate();
         return rowsUpdated > 0;
     }
@@ -72,9 +73,11 @@ public class CoursService implements IService<Cours> {
             return new Cours(
                     res.getInt("idCours"),
                     res.getString("LibeleCours"),
-                    res.getTimestamp("DateDebut").toLocalDateTime(), // Convert Timestamp to LocalDateTime
-                    res.getTimestamp("DateFin").toLocalDateTime(),   // Convert Timestamp to LocalDateTime
-                    res.getInt("idEnseignant")
+                    res.getTimestamp("DateDebut").toLocalDateTime(),
+                    res.getTimestamp("DateFin").toLocalDateTime(),
+                    res.getInt("idEnseignant"),
+                    res.getInt("idModule")
+
             );
         }
         return null;
@@ -96,7 +99,8 @@ public class CoursService implements IService<Cours> {
                     res.getString("LibeleCours"),
                     dateDebut, // Use LocalDateTime
                     dateFin,   // Use LocalDateTime
-                    res.getInt("idEnseignant")
+                    res.getInt("idEnseignant"),
+                    res.getInt("idModule")
             );
             coursList.add(cours);
         }
