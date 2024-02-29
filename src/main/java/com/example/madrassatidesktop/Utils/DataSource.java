@@ -1,4 +1,4 @@
-package com.example.madrassatidesktop.Utils;
+package com.example.madrassatidesktop.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

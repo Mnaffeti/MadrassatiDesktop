@@ -9,21 +9,22 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    public static Boolean isSplashLoaded = false;
-    @Override
-    public void start(Stage stage) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-        Scene scene = new Scene(root);
-        stage.setTitle("Madrassati");
-        stage.setScene(scene);
-        String css = this.getClass().getResource("style.css").toExternalForm();
-        scene.getStylesheets().add(css);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Statistique.fxml"));
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
     }
 }
