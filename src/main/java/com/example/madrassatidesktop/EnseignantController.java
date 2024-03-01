@@ -6,11 +6,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -27,9 +32,9 @@ public class EnseignantController {
 
     @FXML
     void initialize() {
-        // Initialize teacher table
+
         initTeacherTable();
-        // Load data into teacher table
+
         loadTeacherData();
     }
 
@@ -53,15 +58,24 @@ public class EnseignantController {
             teacherTable.setItems(teachers);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
+
         }
     }
 
     @FXML
     void addTeacher() {
-        // Implement add teacher functionality
-        // You can open a new window or dialog for adding a teacher
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEnseignantForm.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
+
 
     @FXML
     void deleteTeacher() {
@@ -78,11 +92,11 @@ public class EnseignantController {
                     if (deleted) {
                         teacherTable.getItems().remove(selectedTeacher);
                     } else {
-                        // Handle deletion failure
+
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    // Handle exception
+
                 }
             }
         } else {
@@ -96,5 +110,21 @@ public class EnseignantController {
 
     @FXML
     void updateTeacher() {
+        Enseignant selectedTeacher = teacherTable.getSelectionModel().getSelectedItem();
+        if (selectedTeacher != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEnseignantForm.fxml"));
+                Parent root = loader.load();
+               EnseignantFormController controller = loader.getController();
+                controller.initData(selectedTeacher);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
     }
+
 }
