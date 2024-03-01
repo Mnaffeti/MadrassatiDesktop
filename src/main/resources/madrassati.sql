@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 29 fév. 2024 à 23:35
+-- Généré le : ven. 01 mars 2024 à 02:07
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -122,7 +122,9 @@ INSERT INTO `etudiant` (`nom`, `prenom`, `age`, `idFormation`, `idUtilisateur`) 
                                                                                     ('خالد', 'يوسف', 21, 3, 3),
                                                                                     ('aaa', 'aaa', 22, 3, 12),
                                                                                     ('zezezae', 'ezaeaze', 10, 1, 21),
-                                                                                    ('Mohamed Aziz', 'Naffeti', 23, 1, 22);
+                                                                                    ('Mohamed Aziz', 'Naffeti', 23, 1, 22),
+                                                                                    ('bb', 'bb', 2, 1, 25),
+                                                                                    ('melek', 'homrani', 25, 2, 26);
 
 -- --------------------------------------------------------
 
@@ -137,6 +139,21 @@ CREATE TABLE `exam` (
                         `marks` decimal(5,2) DEFAULT NULL,
                         `exam_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `exam`
+--
+
+INSERT INTO `exam` (`exam_id`, `idUtilisateur`, `idCours`, `marks`, `exam_date`) VALUES
+                                                                                     (1, 22, 10, 15.00, '2024-03-01'),
+                                                                                     (2, 22, 12, 12.00, '2024-03-02'),
+                                                                                     (3, 22, 13, 18.00, '2024-03-03'),
+                                                                                     (4, 22, 14, 20.00, '2024-03-04'),
+                                                                                     (5, 22, 15, 10.00, '2024-03-05'),
+                                                                                     (6, 22, 16, 17.00, '2024-03-06'),
+                                                                                     (7, 22, 17, 8.00, '2024-03-07'),
+                                                                                     (9, 26, 3, 10.00, '2024-03-01'),
+                                                                                     (11, 26, 9, 18.00, '2024-02-06');
 
 -- --------------------------------------------------------
 
@@ -158,9 +175,9 @@ CREATE TABLE `formation` (
 --
 
 INSERT INTO `formation` (`idFormation`, `sujet`, `description`, `difficulte`, `duree`, `idCategorie`) VALUES
-                                                                                                          (1, 'Baccalaureat', 'Bac', 'Facile', 20, 1),
+                                                                                                          (1, 'ALT', 'Alternance Genie Logiciel', 'Facile', 20, 1),
                                                                                                           (2, 'PHD', 'PHD', 'HARD', 30, 2),
-                                                                                                          (3, 'Engineering', 'SW ENG', 'Difficile', 40, 1),
+                                                                                                          (3, 'Engineering', 'Genie Logiciel', 'Difficile', 40, 1),
                                                                                                           (4, 'HTML', 'HTML, sigle de HyperText Markup Language, est le format de données conçu pour représenter les pages web.', 'Facile', 20, 2),
                                                                                                           (5, 'CSS', 'Les feuilles de style en cascade, généralement appelées CSS de langlais Cascading Style Sheets, forment un langage informatique qui décrit la présentation des documents HTML et XML.', 'Moyen', 30, 2),
                                                                                                           (6, 'JavaScript', 'JavaScript est un langage de programmation de scripts principalement employé dans les pages web interactives mais aussi coté serveur.', 'Difficile', 40, 2),
@@ -188,7 +205,7 @@ CREATE TABLE `module` (
 
 INSERT INTO `module` (`idModule`, `idFormation`, `coeff`, `LibModule`) VALUES
                                                                            (1, 1, 4, 'Math et Proba'),
-                                                                           (2, 3, 1, 'OOP');
+                                                                           (2, 2, 1, 'OOP');
 
 -- --------------------------------------------------------
 
@@ -225,7 +242,9 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `email`, `motdepasse`) VALUES
                                                                        (19, 'rere', 'eee'),
                                                                        (20, 'aa', 'dd'),
                                                                        (21, 'zeaze', 'eazeaze'),
-                                                                       (22, 'mednaffeti@madrassati.tn', '123456789');
+                                                                       (22, 'mednaffeti@madrassati.tn', '123456789'),
+                                                                       (25, 'aaziz@elelfe', 'bbbbbbbbb'),
+                                                                       (26, 'melek@madrassati.tn', '123456789');
 
 --
 -- Index pour les tables déchargées
@@ -303,7 +322,7 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `exam`
 --
 ALTER TABLE `exam`
-    MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `formation`
@@ -321,7 +340,7 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-    MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+    MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Contraintes pour les tables déchargées

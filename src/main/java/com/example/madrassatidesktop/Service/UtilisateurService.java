@@ -92,6 +92,8 @@ public class UtilisateurService implements IService<Utilisateur> {
 
         return userId; // Returning the user ID (or -1 if not found)
     }
+
+
     @Override
     public List<Utilisateur> findAll() throws SQLException {
         List<Utilisateur> utilisateurs = new ArrayList<>();

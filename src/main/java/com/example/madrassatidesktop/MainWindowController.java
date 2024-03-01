@@ -2,6 +2,9 @@ package com.example.madrassatidesktop;
 
 
 import com.example.madrassatidesktop.Entite.Utilisateur;
+import com.example.madrassatidesktop.Service.CoursService;
+import com.example.madrassatidesktop.Service.EtudiantService;
+import com.example.madrassatidesktop.Service.ExamService;
 import com.example.madrassatidesktop.Service.UtilisateurService;
 import com.example.madrassatidesktop.Utils.DataSource;
 import javafx.animation.FadeTransition;
@@ -27,6 +30,8 @@ import javafx.util.Duration;
 import javafx.scene.media.Media;
 
 import javafx.scene.media.MediaView;
+
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -89,11 +94,13 @@ public class MainWindowController implements Initializable {
         String password = UserPwdField.getText();
 
        UtilisateurService service = UtilisateurService.getInstance();
+       int id =service.getUserIdByEmail(email);
        boolean isAuthenticated = service.authenticate(email, password);
 
        if (isAuthenticated) {
+           //get the user id
            // Authentication successful
-           navigateToMainScreen();
+           navigateToMainScreen(id);
        } else {
            LoginLabel.setText("LoginFailed");
            // Authentication failed
@@ -103,11 +110,21 @@ public class MainWindowController implements Initializable {
 
 
 
-        private void navigateToMainScreen() {
+        private void navigateToMainScreen(int id) {
             try {
                 // Load the FXML file for the main screen
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("DashBoardStudent.fxml")); // Make sure to provide the correct path
                 Parent root = loader.load();
+                DashBoardStudentController controller = loader.getController();
+                EtudiantService ser = EtudiantService.getInstance();
+                controller.setId(id);
+                String StudentNamePrenom=ser.getNomPrenomById(id) ;
+                String formation=ser.getFormationDescriptionForStudent(id) ;
+                int nbexams= ExamService.getInstance().getNumberOfExamsByUserId(id);
+                float avgmarks= ExamService.getInstance().getAVGOfExamsByUserId(id);
+                int nbcours = CoursService.getInstance().getNumberOfUpcomingCourses();
+                // Set the student's name in the controller
+                controller.setStudentinfos(StudentNamePrenom,nbexams,avgmarks,nbcours,formation);
 
                 // Get the current stage (window) using the login label
                 Stage stage = (Stage) LoginLabel.getScene().getWindow();
@@ -123,6 +140,8 @@ public class MainWindowController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
                 // Handle the exception (e.g., log the error, show an error alert)
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
 

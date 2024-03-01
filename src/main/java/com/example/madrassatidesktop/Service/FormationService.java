@@ -120,44 +120,4 @@ public class FormationService implements IService<Formation> {
         return formations;
     }
 
-    // Setters and Getters
-    public void setIdCategorie(Formation formation, int idCategorie) {
-        formation.setIdCategorie(idCategorie);
-    }
-
-    public int getIdCategorie(Formation formation) {
-        return formation.getIdCategorie();
-    }
-
-    public void setDescription(Formation formation, String description) {
-        formation.setDescription(description);
-    }
-
-    public String getDescription(Formation formation) {
-        return formation.getDescription();
-    }
-
-    public void setSujet(Formation formation, String sujet) {
-        formation.setSujet(sujet);
-    }
-
-    public String getSujet(Formation formation) {
-        return formation.getSujet();
-    }
-
-    public void setNom(Formation formation, String nom) {
-        formation.setNom(nom);
-    }
-
-    public String getNom(Formation formation) {
-        return formation.getNom();
-    }
-
-    public void setId(Formation formation, int id) {
-        formation.setId(id);
-    }
-
-    public int getId(Formation formation) {
-        return formation.getId();
-    }
 }

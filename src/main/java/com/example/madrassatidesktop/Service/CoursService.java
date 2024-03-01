@@ -84,7 +84,21 @@ public class CoursService implements IService<Cours> {
     }
 
 
+    public int getNumberOfUpcomingCourses() throws SQLException {
+        String sql = "SELECT COUNT(*)  AS total FROM cours ;";
+        int totalCourses = 0;
 
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            // Set the current date as parameter
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    totalCourses = rs.getInt("total");
+                }
+            }
+        }
+        return totalCourses;
+    }
     public List<Cours> findAll() throws SQLException {
         List<Cours> coursList = new ArrayList<>();
         String req = "SELECT * FROM `cours`;";

@@ -2,14 +2,24 @@ package com.example.madrassatidesktop;
 
 import com.calendarfx.model.Entry;
 import com.example.madrassatidesktop.Entite.Cours;
+import com.example.madrassatidesktop.Entite.CourseMark;
+import com.example.madrassatidesktop.Entite.Exam;
 import com.example.madrassatidesktop.HelloApplication;
 import com.example.madrassatidesktop.Service.CoursService;
+import com.example.madrassatidesktop.Service.ExamService;
+import com.example.madrassatidesktop.Service.UtilisateurService;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 
 import javafx.fxml.FXML;
@@ -60,7 +70,8 @@ public class DashBoardStudentController implements Initializable {
 
     @FXML
     private Pane pnlOrders;
-
+    @FXML
+    private Label NbOfUpcoming;
     @FXML
     private Pane pnlOverview;
     @FXML
@@ -70,14 +81,57 @@ public class DashBoardStudentController implements Initializable {
     @FXML
     private AnchorPane rootPane;
     @FXML
-    
+    private Label NbExams;
+    @FXML
+    private Label avgMarks;
+    @FXML
+    private Label Studentformation;
+    @FXML
+    private  Pane StatPane;
+    private  int id;
+    private ExamService examService; // Assume this is initialized elsewhere
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
 
 
     }
 
+    public void setStudentinfos(String name,int nbexam,float avgmarks, int nbcours,String formation) {
+        StudentName.setText(name);
+        NbExams.setText(String.valueOf(nbexam));
+        avgMarks.setText(String.valueOf(avgmarks));
+        NbOfUpcoming.setText(String.valueOf(nbcours));
+        Studentformation.setText(formation);
+
+
+    }
+    public void displayCourseMarksChart(List<CourseMark> courseMarks) {
+        // Create the axes
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Course");
+        yAxis.setLabel("Marks");
+
+        // Create the BarChart
+        final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Course Marks");
+
+        // Create a data series
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Marks by Course");
+
+        // Populate the series with data from courseMarks
+        for (CourseMark cm : courseMarks) {
+            series.getData().add(new XYChart.Data<>(cm.getLibeleCours(), cm.getMarks()));
+        }
+
+        // Add the series to the chart
+        barChart.getData().add(series);
+
+        // Add the chart to the pane
+        StatPane.getChildren().clear(); // Clear existing content if any
+        StatPane.getChildren().add(barChart); // Add the chart
+    }
 
     @FXML
     void OpenCalendarAction(ActionEvent event) throws SQLException {
@@ -117,9 +171,27 @@ public class DashBoardStudentController implements Initializable {
     public void handleClicks(ActionEvent event) {
     }
 
-    public void ShowStats(ActionEvent event) {
+    public void ShowStats(ActionEvent event) throws SQLException {
+        List<CourseMark> tmp =ExamService.getInstance().getCourseMarksByUserId(this.id);
+        displayCourseMarksChart(tmp);
     }
+    public  void setId(int id){this.id=id ;}
 
     public void TakeMeToLogin(ActionEvent event) {
+        try {
+            // Load the Main Window view
+            Parent mainWindowParent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+            Scene mainWindowScene = new Scene(mainWindowParent);
+
+            // Get the stage from the event that triggered the method call
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the scene on the stage to switch back to the Main Window
+            window.setScene(mainWindowScene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

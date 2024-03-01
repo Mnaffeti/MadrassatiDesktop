@@ -89,36 +89,43 @@ public class EtudiantService implements IService<Etudiant> {
         }
         return etudiants;
     }
-    public  int getUserIdByEmail(String email) {
-        // SQL query to find the user ID
-        String sql = "SELECT id FROM utilisateur WHERE mail = ?";
+    public String getFormationDescriptionForStudent(int idUtilisateur) throws SQLException {
+        String sql =
+                "SELECT f.description " +
+                        "FROM etudiant e " +
+                        "JOIN formation f ON e.idFormation = f.idFormation " +
+                        "WHERE e.idUtilisateur = ?";
 
-        // Local variable to store the ID. Initialized to -1 or another invalid value to represent not found.
-        int userId = -1;
+        String description = null;
 
-        try {
-            // Establishing the connection
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, idUtilisateur);
 
-
-            // Preparing the statement to prevent SQL injection
-            UtilisateurService ser =UtilisateurService.getInstance() ;
-
-            // Executing the query
-            Statement stmt = con.createStatement() ;
-            ResultSet rs = stmt.executeQuery(sql);
-
-            // Retrieving the ID from the ResultSet
-            if (rs.next()) {
-                userId = rs.getInt("id");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    description = rs.getString("description");
+                }
             }
-
-            // Closing resources
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+        return description;
+    }
 
-        return userId; // Returning the user ID (or -1 if not found)
+    public String getNomPrenomById(int idEtudiant) {
+
+        String sql = "SELECT nom, prenom FROM etudiant WHERE idUtilisateur = ?";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, idEtudiant);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String nom = rs.getString("nom");
+                    String prenom = rs.getString("prenom");
+                    return nom + " " + prenom; // Or however you wish to format it
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            // Handle exceptions appropriately
+        }
+        return null; // Return null or appropriate value if student not found
     }
 }
