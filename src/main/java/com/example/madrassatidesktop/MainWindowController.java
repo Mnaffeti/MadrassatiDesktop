@@ -1,9 +1,7 @@
 package com.example.madrassatidesktop;
 
 
-import com.example.madrassatidesktop.Entite.Utilisateur;
 import com.example.madrassatidesktop.Service.UtilisateurService;
-import com.example.madrassatidesktop.Utils.DataSource;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,26 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.scene.media.Media;
-
-import javafx.scene.media.MediaView;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import com.calendarfx.model.Calendar;
-import com.calendarfx.model.Calendar.Style;
-import com.calendarfx.model.CalendarSource;
-import com.calendarfx.view.CalendarView ;
-
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {

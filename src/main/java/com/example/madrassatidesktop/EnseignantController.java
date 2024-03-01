@@ -2,11 +2,13 @@ package com.example.madrassatidesktop;
 
 import com.example.madrassatidesktop.Entite.Enseignant;
 import com.example.madrassatidesktop.Service.EnseignantService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.sql.SQLException;
@@ -32,19 +34,18 @@ public class EnseignantController {
     }
 
     private void initTeacherTable() {
-        // Configure table columns
-        // Assuming Enseignant class has appropriate getters for nom, prenom, and specialite
         TableColumn<Enseignant, String> nomColumn = new TableColumn<>("Nom");
-        nomColumn.setCellValueFactory(data -> data.getValue().getNomProperty());
+        nomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNom()));
 
         TableColumn<Enseignant, String> prenomColumn = new TableColumn<>("Prenom");
-        prenomColumn.setCellValueFactory(data -> data.getValue().getPrenomProperty());
+        prenomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrenom()));
 
         TableColumn<Enseignant, String> specialiteColumn = new TableColumn<>("Specialite");
-        specialiteColumn.setCellValueFactory(data -> data.getValue().getSpecialiteProperty());
+        specialiteColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSpecialite()));
 
         teacherTable.getColumns().addAll(nomColumn, prenomColumn, specialiteColumn);
     }
+
 
     private void loadTeacherData() {
         try {
