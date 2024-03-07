@@ -73,11 +73,11 @@ public class UserManagement implements Initializable {
     private void loadStudents() {
         EtudiantService service = EtudiantService.getInstance();
         try {
-            List<Etudiant> etudiantList = service.findAll(); // Fetch the list from the service
+            List<Etudiant> etudiantList = service.findAll();
             ObservableList<Etudiant> etudiantObservableList = FXCollections.observableArrayList(etudiantList); // Convert to ObservableList
-            StudentTable.setItems(etudiantObservableList); // Set the ObservableList to the TableView
+            StudentTable.setItems(etudiantObservableList);
         } catch (SQLException e) {
-            e.printStackTrace(); // Properly handle the exception
+            e.printStackTrace();
         }
     }
 }

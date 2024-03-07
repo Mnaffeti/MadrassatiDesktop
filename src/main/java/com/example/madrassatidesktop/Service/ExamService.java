@@ -70,11 +70,10 @@ public class ExamService {
         String sql = "SELECT c.LibeleCours, e.marks " +
                 "FROM exam e " +
                 "JOIN cours c ON e.idCours = c.idCours " +
-                "WHERE e.idUtilisateur = ?"; // Add WHERE clause here
+                "WHERE e.idUtilisateur = ?";
 
         try (PreparedStatement pstmt = con.prepareStatement(sql)) {
-            pstmt.setInt(1, idUtilisateur); // Set idUtilisateur for the query
-
+            pstmt.setInt(1, idUtilisateur);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String libeleCours = rs.getString("LibeleCours");

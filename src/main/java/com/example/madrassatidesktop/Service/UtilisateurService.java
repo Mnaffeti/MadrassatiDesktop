@@ -63,15 +63,13 @@ public class UtilisateurService implements IService<Utilisateur> {
         System.out.println(email);
         // SQL query to find the user ID
         String sql = "SELECT idUtilisateur as 'idUtilisateur' FROM utilisateur WHERE email ='"+email+"' ;" ;
-
-        // Local variable to store the ID. Initialized to -1 or another invalid value to represent not found.
         int userId = -1;
 
         try {
-            // Establishing the connection
 
 
-            // Preparing the statement to prevent SQL injection
+
+
             UtilisateurService ser =UtilisateurService.getInstance() ;
 
             // Executing the query
@@ -90,7 +88,7 @@ public class UtilisateurService implements IService<Utilisateur> {
             e.printStackTrace();
         }
 
-        return userId; // Returning the user ID (or -1 if not found)
+        return userId;
     }
 
 
@@ -110,18 +108,16 @@ public class UtilisateurService implements IService<Utilisateur> {
     }
 
     public boolean authenticate(String email, String password) {
-        String req = "SELECT * FROM `utilisateur` WHERE email = ? AND motdepasse = ?"; // Ensure the column names match your database schema
-        try (Connection con = DataSource.getInstance().getCon(); // Use try-with-resources to ensure proper resource management
+        String req = "SELECT * FROM `utilisateur` WHERE email = ? AND motdepasse = ?";
+        try (Connection con = DataSource.getInstance().getCon();
              PreparedStatement pstmt = con.prepareStatement(req)) {
-
-            // Set parameters
             pstmt.setString(1, email);
             pstmt.setString(2, password);
 
-            // Execute the query
+
             ResultSet rs = pstmt.executeQuery();
 
-            // Check if a record was found
+
             return rs.next();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

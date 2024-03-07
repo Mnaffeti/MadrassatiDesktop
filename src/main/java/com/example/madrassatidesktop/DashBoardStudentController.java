@@ -183,10 +183,10 @@ public class DashBoardStudentController implements Initializable {
             Parent mainWindowParent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
             Scene mainWindowScene = new Scene(mainWindowParent);
 
-            // Get the stage from the event that triggered the method call
+
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the scene on the stage to switch back to the Main Window
+
             window.setScene(mainWindowScene);
             window.show();
         } catch (IOException e) {

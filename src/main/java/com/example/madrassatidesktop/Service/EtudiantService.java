@@ -119,13 +119,13 @@ public class EtudiantService implements IService<Etudiant> {
                 if (rs.next()) {
                     String nom = rs.getString("nom");
                     String prenom = rs.getString("prenom");
-                    return nom + " " + prenom; // Or however you wish to format it
+                    return nom + " " + prenom;
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             // Handle exceptions appropriately
         }
-        return null; // Return null or appropriate value if student not found
+        return null;
     }
 }

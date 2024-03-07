@@ -173,10 +173,10 @@ public class MainWindowController implements Initializable {
            HelloApplication.isSplashLoaded=true ;
            //Load splash screen view FXML
            StackPane pane = FXMLLoader.load(getClass().getResource(("Splash.fxml")));
-           //Add it to root container (Can be StackPane, AnchorPane etc)
+
            root.getChildren().setAll(pane);
 
-           //Load splash screen with fade in effect
+
            FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), pane);
            fadeIn.setFromValue(0);
            fadeIn.setToValue(1);
@@ -190,12 +190,12 @@ public class MainWindowController implements Initializable {
 
            fadeIn.play();
 
-           //After fade in, start fade out
+
            fadeIn.setOnFinished((e) -> {
                fadeOut.play();
            });
 
-           //After fade out, load actual content
+
            fadeOut.setOnFinished((e) -> {
                try {
                    AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("MainWindow.fxml")));
